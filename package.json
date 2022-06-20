@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/alvin-odins/api-app-pol/issues"
   },
-  "homepage": "https://github.com/alvin-odins/api-app-pol#readme"
+  "homepage": "https://github.com/alvin-odins/api-app-pol#readme",
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "mongodb": "^4.7.0"
+  }
 }
