@@ -1,24 +1,27 @@
-const express = require( 'express' )
+const express = require('express')
 const app = express()
-const MongoClient = require('mongodb').MongoClient
+const {MongoClient} = require('mongodb')
 
-
-const PORT = 2022
 require('dotenv').config()
+const PORT = 8000
 
-// db connection
-let db_STRING= process.env.db_STRING
-MongoClient.connect(db_STRING, {useUnifiedTopology:true})
+let db,
+    dbConnectionStr = process.env.DB_STRING,
+    dbName = 'pol',
+    collection
+
+MongoClient.connect(dbConnectionStr)
   .then(client => {
-    console.log(`connected to database`)
+      console.log(`connected to database`)
+      db = client.db(dbName)
+      collection = db.collection('pol')
   })
 
-// middleware
 
-app.set('view engine', 'ejs')
-app.use(express.static('public'))
+// middleware
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
+
 
 
 // routes
