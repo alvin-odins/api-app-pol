@@ -12,14 +12,6 @@ let db,
   dbName = "pol",
   collection;
 
-MongoClient.connect(dbConnectionStr)
-  .then(client => {
-      console.log(`connected to database`)
-      db = client.db(dbName)
-      collection = db.collection('leaders')
-  })
-
-
 MongoClient.connect(dbConnectionStr).then((client) => {
   console.log(`connected to database`);
   db = client.db(dbName);
