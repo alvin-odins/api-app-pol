@@ -1,12 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> Leaders: National </title>
+  <%- include('head'); %>
 </head>
-<body>
-  <h1> Live </h1>
+<body class="container">
+  <header>
+    <%- include('header'); %>
+  </header>
+
+  <main>
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="jumbotron">
+          <ul class="pol">
+            <% for( let i = 0; i < leaders.length; i++ ) { %>
+              <li class="pol">
+                <span><%= leaders[i].name %></span>:
+        
+                <span><%= leaders[i].born %></span>:
+                <span><%= leaders[i].about %></span>:
+                <span><%= leaders[i].tenure %></span>:
+                <span><%= leaders[i].country %></span>:
+                <span><%= leaders[i].url %></span>:
+                <span><%= leaders[i].office_post %></span>:
+              </li>
+            <% } %>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+        <div class="well">
+          <h3>Displaying All Leaders</h3>
+
+         
+        </div>
+      </div>
+    
+    </div>
+  </main>
+
+ 
+  
+    
+  </section>
 </body>
 </html>
