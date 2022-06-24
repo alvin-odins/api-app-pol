@@ -12,6 +12,14 @@ let db,
   dbName = "pol",
   collection;
 
+MongoClient.connect(dbConnectionStr)
+  .then(client => {
+      console.log(`connected to database`)
+      db = client.db(dbName)
+      collection = db.collection('leaders')
+  })
+
+
 MongoClient.connect(dbConnectionStr).then((client) => {
   console.log(`connected to database`);
   db = client.db(dbName);
@@ -19,15 +27,22 @@ MongoClient.connect(dbConnectionStr).then((client) => {
 });
 
 // middleware
+
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // routes
-app.get("/", (request, response) => {
-  response.render("index.ejs");
-});
+// routes
+app.get( '/', ( request, response ) => {
+  collection.find().toArray()
+            .then(results => { 
+              response.render('index.ejs', { leaders: results })
+              console.log(results)
+             })
+             .catch(error => console.log(error))
+} )
 
 //post request to add a new leader
 app.post("/leaders", async (req, res) => {
