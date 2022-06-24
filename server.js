@@ -14,7 +14,7 @@ MongoClient.connect(dbConnectionStr)
   .then(client => {
       console.log(`connected to database`)
       db = client.db(dbName)
-      collection = db.collection('pol')
+      collection = db.collection('leaders')
   })
 
 
