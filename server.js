@@ -19,10 +19,6 @@ MongoClient.connect(dbConnectionStr).then((client) => {
 });
 
 // middleware
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-
-// middleware
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
@@ -37,10 +33,10 @@ app.get("/", (request, response) => {
 app.post("/leaders", async (req, res) => {
   const leader = req.body;
   try {
-    const result = await db.collection("leaders").insertOne(leader);
+    const result = await db.collection("leaders").insertOne();
     res.status(200).json(result);
   } catch (err) {
-    res.status().json({ message: err.message });
+    res.status(404).json({ message: err.message });
   }
 });
 
