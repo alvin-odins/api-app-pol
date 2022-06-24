@@ -21,13 +21,30 @@ MongoClient.connect(dbConnectionStr)
 // middleware
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
+app.set('view engine', 'ejs')
+app.use(express.static('public'))
 
 
 
 // routes
 app.get( '/', ( request, response ) => {
-  response.render( 'index.ejs' )
+  collection.find().toArray()
+            .then(results => { 
+              response.render('index.ejs', { leaders: results })
+              console.log(results)
+             })
+             .catch(error => console.log(error))
 } )
+
+app.post('/pol', ( request, response ) => { 
+  collection.insertOne(request.body)
+   .then(result => {
+     response.redirect('/')
+   })
+   .catch(error => console.log(error))
+ } )
+
+ 
 
 
 app.listen( process.env.PORT || PORT, () => {
